@@ -38,10 +38,13 @@ class _SearchState extends State<Search> {
             autofocus: true,
             cursorColor: Colors.red,
             decoration: InputDecoration(
-                contentPadding: EdgeInsets.symmetric(vertical: 13),
-                border: InputBorder.none,
-                hintText: 'Поиск',
-                hintStyle: TextStyle(color: Colors.white)),
+              // contentPadding: EdgeInsets.symmetric(vertical: 13),
+              border: InputBorder.none,
+              hintText: 'Поиск',
+              hintStyle: TextStyle(
+                color: Colors.white,
+              ),
+            ),
           ),
         ),
         actions: [
