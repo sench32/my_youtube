@@ -4,7 +4,7 @@ import '../custom__icons.dart';
 
 // ignore: camel_case_types
 class My_search extends SearchDelegate {
-  My_search({Color cursorColor}) : super(cursorColor: cursorColor);
+  // My_search({Color cursorColor}) : super(cursorColor: cursorColor);
   @override
   ThemeData appBarTheme(BuildContext context) {
     return ThemeData(

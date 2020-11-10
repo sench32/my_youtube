@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
 import 'screens/acaunt_screen.dart';
-import 'screens/search.dart';
+import 'screens/my_search.dart';
+// import 'screens/search.dart';
 
 class MySliverAppBar extends CustomScrollView {
   @override
@@ -31,15 +32,15 @@ class MySliverAppBar extends CustomScrollView {
             size: 25,
           ),
           onPressed: () {
-            showSearch(context: context, delegate: My_search());
-            // Navigator.push(
-            //   context,
-            //   PageTransition(
-            //     duration: Duration(milliseconds: 50),
-            //     type: PageTransitionType.fade,
-            //     child: Search(),
-            //   ),
-            // );
+            // showSearch(context: context, delegate: My_search());
+            Navigator.push(
+              context,
+              PageTransition(
+                duration: Duration(milliseconds: 50),
+                type: PageTransitionType.fade,
+                child: Search(),
+              ),
+            );
           },
         ),
         IconButton(
