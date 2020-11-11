@@ -20,6 +20,8 @@ class MySliverAppBar extends CustomScrollView {
       ),
       actions: <Widget>[
         IconButton(
+          highlightColor: Colors.transparent,
+          splashColor: Colors.transparent,
           icon: Icon(
             Icons.videocam,
             size: 25,
@@ -27,12 +29,13 @@ class MySliverAppBar extends CustomScrollView {
           onPressed: () {},
         ),
         IconButton(
+          highlightColor: Colors.transparent,
+          splashColor: Colors.transparent,
           icon: Icon(
             Icons.search,
             size: 25,
           ),
           onPressed: () {
-            // showSearch(context: context, delegate: My_search());
             Navigator.push(
               context,
               PageTransition(
@@ -44,6 +47,9 @@ class MySliverAppBar extends CustomScrollView {
           },
         ),
         IconButton(
+          splashRadius: 24,
+          highlightColor: Colors.grey[500].withOpacity(0.3),
+          splashColor: Colors.transparent,
           icon: ClipRRect(
             // child: Image.network('https://lh3.googleusercontent.com/ogw/ADGmqu8r_x3BJ2shfQ59TnXh4LJX7nPO0mPUj5cONbU=s83-c-mo', width: 24,),
             child: Image.asset(

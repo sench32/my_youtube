@@ -65,6 +65,7 @@ class _HomePageState extends State<HomePage> {
                   icon: Icon(
                     Icons.home,
                   ),
+                  // ignore: deprecated_member_use
                   title: Text(
                     'Главная',
                     style: TextStyle(),
@@ -74,6 +75,7 @@ class _HomePageState extends State<HomePage> {
                   icon: Icon(
                     Icons.explore,
                   ),
+                  // ignore: deprecated_member_use
                   title: Text(
                     'Навигатор',
                     style: TextStyle(),
@@ -83,6 +85,7 @@ class _HomePageState extends State<HomePage> {
                   icon: Icon(
                     Custom_Icons.subscriptions_24px,
                   ),
+                  // ignore: deprecated_member_use
                   title: Text(
                     'Подписки',
                     style: TextStyle(),
@@ -92,6 +95,7 @@ class _HomePageState extends State<HomePage> {
                   icon: Icon(
                     Icons.mail,
                   ),
+                  // ignore: deprecated_member_use
                   title: Text(
                     'Входящие',
                     style: TextStyle(),
@@ -101,6 +105,7 @@ class _HomePageState extends State<HomePage> {
                   icon: Icon(
                     Icons.video_library,
                   ),
+                  // ignore: deprecated_member_use
                   title: Text(
                     'Библиотека',
                     style: TextStyle(),
