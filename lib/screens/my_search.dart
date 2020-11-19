@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
+
+import '../custom__icons.dart';
+import 'speech_to_text.dart';
 
 class Search extends StatefulWidget {
   Search({Key key}) : super(key: key);
@@ -8,13 +12,8 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-  // String get query => _controller.text;
-  // set query(String value) {
-  //   assert(query != null);
-  //   _controller.text = value;
-  // }
-
   final TextEditingController _controller = TextEditingController();
+  var titles = [];
 
   @override
   void initState() {
@@ -24,10 +23,15 @@ class _SearchState extends State<Search> {
 
   void _onQueryChanged() {
     setState(() {
-      if (_controller != null) print(_controller.text.length);
+      // if (_controller != null) print(_controller.text.length);
       // rebuild ourselves because query changed.
       // перестроить, потому что запрос изменился.
     });
+  }
+
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -35,15 +39,15 @@ class _SearchState extends State<Search> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       resizeToAvoidBottomPadding: true,
-      backgroundColor: Colors.grey[800],
+      backgroundColor: Colors.grey.shade900,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         shadowColor: Colors.black87,
-        elevation: 8,
-        backgroundColor: Colors.grey[800],
+        elevation: 4,
+        backgroundColor: Colors.grey.shade900,
         leading: IconButton(
           splashRadius: 25,
-          highlightColor: Colors.grey[500].withOpacity(0.2),
+          highlightColor: Colors.grey[600].withOpacity(0.2),
           splashColor: Colors.transparent,
           icon: Icon(
             Icons.arrow_back,
@@ -54,41 +58,87 @@ class _SearchState extends State<Search> {
           },
         ),
         flexibleSpace: Container(
+          decoration: BoxDecoration(
+            color: Colors.grey[800],
+            borderRadius: BorderRadius.circular(3),
+            border: Border.all(color: Colors.grey[800]),
+          ),
           margin: (_controller.text.length != 0)
-              ? EdgeInsets.fromLTRB(55, 33, 40, 11)
-              : EdgeInsets.fromLTRB(55, 33, 50, 11),
+              ? EdgeInsets.fromLTRB(54, 33, 7, 11)
+              : EdgeInsets.fromLTRB(54, 33, 50, 11),
           padding: EdgeInsets.fromLTRB(6, 0, 0, 0),
           height: 40,
-          color: Colors.grey[600],
-          child: TextField(
-            controller: _controller,
-            style: TextStyle(color: Colors.white, fontSize: 16),
-            autofocus: true,
-            cursorColor: Colors.red,
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: Colors.grey[600],
-              contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 14),
-              border: InputBorder.none,
-              hintText: 'Поиск',
-              hintStyle: TextStyle(
-                color: Colors.white,
-              ),
-            ),
-          ),
+          child: (_controller.text.length != 0)
+              ? TextField(
+                  controller: _controller,
+                  onSubmitted: (String value) async {
+                    titles.add(_controller.text);
+                    _controller.clear();
+                    // showDialog<void>(
+                    //   context: context,
+                    //   builder: (BuildContext context) {
+                    //     return AlertDialog(
+                    //       title: const Text('Thanks!'),
+                    //       content: Text('You typed "$value".'),
+                    //       actions: <Widget>[
+                    //         FlatButton(
+                    //           onPressed: () {
+                    //             Navigator.pop(context);
+                    //           },
+                    //           child: const Text('OK'),
+                    //         ),
+                    //       ],
+                    //     );
+                    //   },
+                    // );
+                  },
+                  style: TextStyle(color: Colors.white, fontSize: 16),
+                  autofocus: true,
+                  cursorHeight: 22,
+                  cursorWidth: 1.5,
+                  cursorColor: Colors.red,
+                  decoration: InputDecoration(
+                    suffix: SizedBox(
+                      width: 38,
+                    ),
+                    filled: true,
+                    fillColor: Colors.grey[800],
+                    contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 14),
+                    border: InputBorder.none,
+                    hintText: 'Поиск',
+                    hintStyle: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                )
+              : TextField(
+                  controller: _controller,
+                  style: TextStyle(color: Colors.white, fontSize: 16),
+                  autofocus: true,
+                  cursorHeight: 22,
+                  cursorWidth: 1.5,
+                  cursorColor: Colors.red,
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.grey[800],
+                    contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 14),
+                    border: InputBorder.none,
+                    hintText: 'Поиск',
+                    hintStyle: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
         ),
         actions: [
           (_controller.text.length != 0)
               ? IconButton(
-                  splashRadius: 25,
-                  highlightColor: Colors.grey[500].withOpacity(0.2),
+                  splashRadius: 24,
+                  highlightColor: Colors.grey[600].withOpacity(0.2),
                   splashColor: Colors.transparent,
                   icon: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[600],
-                    ),
-                    height: 34,
-                    width: 34,
+                    height: 40,
+                    width: 40,
                     child: Icon(
                       Icons.clear,
                     ),
@@ -98,23 +148,59 @@ class _SearchState extends State<Search> {
                   },
                 )
               : IconButton(
-                  splashRadius: 25,
-                  highlightColor: Colors.grey[500].withOpacity(0.2),
+                  splashRadius: 24,
+                  highlightColor: Colors.grey[600].withOpacity(0.2),
                   splashColor: Colors.transparent,
                   icon: Container(
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Colors.grey[600],
+                      color: Colors.grey[800],
                     ),
-                    height: 34,
-                    width: 34,
+                    height: 40,
+                    width: 40,
                     child: Icon(
-                      Icons.mic,
+                      Icons.mic_none,
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      PageTransition(
+                        duration: Duration(milliseconds: 50),
+                        type: PageTransitionType.fade,
+                        child: SpeerchToText(),
+                      ),
+                    );
+                  },
                 )
         ],
+      ),
+      body: ListView.builder(
+        reverse: true,
+        shrinkWrap: true,
+        itemCount: titles.length,
+        itemBuilder: (context, index) {
+          return InkWell(
+            key: Key(titles[index]),
+            child: ListTile(
+              leading: Icon(Icons.history, color: Colors.white, size: 21.5),
+              title: Text(
+                titles[index],
+                style: TextStyle(color: Colors.white),
+              ),
+              trailing: Icon(
+                Custom_Icons.mynorthwest_24px,
+                color: Colors.white,
+                size: 14,
+              ),
+            ),
+            onLongPress: () {
+              setState(() {
+                titles.removeAt(index);
+              });
+            },
+          );
+        },
       ),
     );
   }
