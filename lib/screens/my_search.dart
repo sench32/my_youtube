@@ -29,10 +29,10 @@ class _SearchState extends State<Search> {
     });
   }
 
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+  // void dispose() {
+  //   _controller.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -194,6 +194,11 @@ class _SearchState extends State<Search> {
                 size: 14,
               ),
             ),
+            onTap: () {
+              setState(() {
+                _controller.text = titles[index].toString();
+              });
+            },
             onLongPress: () {
               setState(() {
                 titles.removeAt(index);
