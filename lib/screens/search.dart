@@ -3,9 +3,26 @@ import 'package:flutter/material.dart';
 import '../custom__icons.dart';
 
 // ignore: camel_case_types
-class My_search extends SearchDelegate<String> {
+class My_search extends SearchDelegate {
+  // My_search({Color cursorColor}) : super(cursorColor: cursorColor);
   @override
+  ThemeData appBarTheme(BuildContext context) {
+    return ThemeData(
+      inputDecorationTheme: InputDecorationTheme(
+        hintStyle:
+            Theme.of(context).textTheme.headline6.copyWith(color: Colors.white),
+      ),
+      textTheme: TextTheme(
+        headline6: TextStyle(color: Colors.white, fontSize: 22),
+      ),
+      primaryColor: Colors.grey[800],
+      backgroundColor: Colors.grey[800],
+    );
+  }
+
   String get searchFieldLabel => 'Поиск';
+
+  Color get cursorColor => Colors.red;
 
   final sities = [
     "Holliwood",
@@ -70,6 +87,7 @@ class My_search extends SearchDelegate<String> {
     return ListView.builder(
       itemBuilder: (context, index) => Theme(
         data: ThemeData(
+          highlightColor: Colors.transparent,
           splashColor: Colors.transparent,
         ),
         child: ListTile(
