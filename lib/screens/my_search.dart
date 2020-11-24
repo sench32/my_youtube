@@ -94,6 +94,7 @@ class _SearchState extends State<Search> {
                   },
                   style: TextStyle(color: Colors.white, fontSize: 16),
                   autofocus: true,
+                  showCursor: true,
                   cursorHeight: 22,
                   cursorWidth: 1.5,
                   cursorColor: Colors.red,
@@ -115,6 +116,7 @@ class _SearchState extends State<Search> {
                   controller: _controller,
                   style: TextStyle(color: Colors.white, fontSize: 16),
                   autofocus: true,
+                  showCursor: true,
                   cursorHeight: 22,
                   cursorWidth: 1.5,
                   cursorColor: Colors.red,
@@ -201,7 +203,48 @@ class _SearchState extends State<Search> {
             },
             onLongPress: () {
               setState(() {
-                titles.removeAt(index);
+                showDialog<void>(
+                  barrierColor: Colors.black26,
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      backgroundColor: Colors.grey.shade900,
+                      title: Text(
+                        titles[index],
+                        style: TextStyle(color: Colors.white),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      content: Text(
+                        'Удалить из истории \n поиска?',
+                        style: TextStyle(color: Colors.white, fontSize: 18),
+                      ),
+                      actions: <Widget>[
+                        FlatButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text(
+                            'отмена',
+                            style: TextStyle(color: Colors.white, fontSize: 18),
+                          ),
+                        ),
+                        FlatButton(
+                          onPressed: () {
+                            setState(() {
+                              titles.removeAt(index);
+                              Navigator.pop(context);
+                            });
+                          },
+                          child: const Text(
+                            'удалить',
+                            style: TextStyle(color: Colors.white, fontSize: 18),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                );
               });
             },
           );
