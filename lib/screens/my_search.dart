@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../custom__icons.dart';
-import 'speech_to_text.dart';
+import 'screen_speech_to_text.dart';
 
 class Search extends StatefulWidget {
   Search({Key key}) : super(key: key);
@@ -170,7 +170,7 @@ class _SearchState extends State<Search> {
                       PageTransition(
                         duration: Duration(milliseconds: 50),
                         type: PageTransitionType.fade,
-                        child: SpeerchToText(),
+                        child: SpeechScreen(),
                       ),
                     );
                   },
