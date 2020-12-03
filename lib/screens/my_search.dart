@@ -168,7 +168,7 @@ class _SearchState extends State<Search> {
                     Navigator.push(
                       context,
                       PageTransition(
-                        duration: Duration(milliseconds: 50),
+                        duration: Duration(milliseconds: 1),
                         type: PageTransitionType.fade,
                         child: SpeechScreen(),
                       ),

@@ -12,12 +12,14 @@ class SpeechScreen extends StatefulWidget {
 class _SpeechScreenState extends State<SpeechScreen> {
   stt.SpeechToText _speech;
   bool _isListening = false;
-  String _text = 'Говорите...';
+  // ignore: unused_field
+  String _text = '';
 
   @override
   void initState() {
     super.initState();
     _speech = stt.SpeechToText();
+    listen();
   }
 
   @override
@@ -35,14 +37,15 @@ class _SpeechScreenState extends State<SpeechScreen> {
           repeat: true,
           child: _isListening
               ? FloatingActionButton(
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
                   backgroundColor: Colors.red,
                   child: Icon(Icons.mic),
-                  onPressed: _listen,
+                  onPressed: listen,
                 )
               : FloatingActionButton(
                   backgroundColor: Colors.grey[800],
                   child: Icon(Icons.mic_none),
-                  onPressed: _listen,
+                  onPressed: listen,
                 ),
         ),
         body: Column(
@@ -60,30 +63,60 @@ class _SpeechScreenState extends State<SpeechScreen> {
                 },
               ),
             ),
+            Spacer(
+              flex: 1,
+            ),
             SingleChildScrollView(
               padding: EdgeInsets.fromLTRB(25, 30, 15, 80),
               child: Text(
-                _text,
+                _isListening
+                    ? _text = 'Говорите...'
+                    : _text = 'Повторите пыпытку',
                 maxLines: 2,
                 style: const TextStyle(
-                  fontSize: 28.0,
+                  fontSize: 22.0,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+            Spacer(
+              flex: 12,
+            ),
+            SizedBox(),
+            Center(
+              child: Text(
+                _isListening
+                    ? _text = ''
+                    : _text = 'Нажмите на значок микрофона',
+                style: const TextStyle(
+                  fontSize: 16.0,
                   color: Colors.white,
                   fontWeight: FontWeight.w300,
                 ),
               ),
             ),
+            Spacer(
+              flex: 1,
+            ),
+            // SizedBox(),
           ],
         ),
       ),
     );
   }
 
-  void _listen() async {
+  void listen([String s]) async {
     if (!_isListening) {
       bool available = await _speech.initialize(
         onStatus: (val) => print('onStatus: $val'),
-        onError: (val) => print('onError: $val'),
+        onError: (val) {
+          return (setState(() => listen()));
+          // ignore: dead_code
+          _speech.cancel();
+        },
       );
+
       if (available) {
         setState(() => _isListening = true);
         _speech.listen(
