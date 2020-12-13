@@ -62,7 +62,7 @@ class MySliverAppBar extends CustomScrollView {
             Navigator.push(
               context,
               PageTransition(
-                type: PageTransitionType.downToUp,
+                type: PageTransitionType.topToBottom,
                 child: MyAcaunt(),
               ),
             );

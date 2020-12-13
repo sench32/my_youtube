@@ -170,7 +170,7 @@ class _SearchState extends State<Search> {
                       PageTransition(
                         duration: Duration(milliseconds: 50),
                         type: PageTransitionType.fade,
-                        child: SpeerchToText(),
+                        child: SpeechToText(),
                       ),
                     );
                   },
